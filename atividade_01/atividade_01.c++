@@ -1,6 +1,7 @@
 #include <iostream> // Para entrada e saída (cin, cout)
 #include <vector>   // Para usar arrays dinâmicos
 #include <string>   // Para trabalhar com strings
+#include <fstream> // Para manipulação de arquivos
 
 using namespace std; // Para não precisar escrever std:: sempre
 
@@ -10,7 +11,7 @@ using namespace std; // Para não precisar escrever std:: sempre
 int main()
 {
 
-    //QUESTÃO 1
+    //REQUISITO 1
     int n;
     cout << "Digite um número inteiro N > 0: ";
 
@@ -26,7 +27,7 @@ int main()
         return 1;
     }
  
-    //QUESTÃO 2
+    //REQUISITO 2
     int contadorPrimos = 0;
     vector<int> primosEncontrados(n);
 
@@ -43,17 +44,31 @@ int main()
             }
         }
         if (isPrime) {
+            // acessa a posição atual no array e define o valor como o i atual (no caso já confirmamos que é primo)
+
             primosEncontrados[contadorPrimos] = i; // armazena o número primo encontrado no array
             ++contadorPrimos;
         }
     }
+
+    //REQUISITO 3
     cout << "Quantidade de números primos entre 1 e " << n << ": " << contadorPrimos << endl;
-    cout << "Números primos encontrados: ";
-    for (int k = 0; k < contadorPrimos; ++k) {
-        cout << primosEncontrados[k] << " ";
+
+    ofstream arquivo("primos.txt");
+    if (!arquivo) {
+        cout << "Erro ao abrir o arquivo para escrita!" << endl;
+        return 1;
     }
-    cout << endl; // Pula uma linha após imprimir os números primos
-    cout << "valor de n: " << n << endl;
+
+    arquivo << "Números primos encontrados: ";
+    for (int k = 0; k < contadorPrimos; ++k) {
+        arquivo << primosEncontrados[k] << " ";
+    }
+    arquivo << endl;
+    arquivo << "valor de n: " << n << endl;
+    arquivo.close();
+
+    cout << "Números primos salvos em primos.txt" << endl;
 
 
     // Seu código vai aqui

@@ -77,7 +77,7 @@ for (int j = 2; j * j <= i; ++j) {
 
 **B)** `j * j <= i`
 - Continua **enquanto** j² ≤ i
-- **Equivale a:** j ≤ √i (aquela otimização que explicamos!)
+- **Equivale a:** j ≤ √i 
 - **Exemplo:** Se i=25, então j vai até 5 (porque 5²=25)
 
 **C)** `++j`
