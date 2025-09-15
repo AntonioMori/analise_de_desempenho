@@ -17,7 +17,6 @@ public class MaquinaDeLerArquivos {
             // Ler primeira linha com os valores iniciais da lista
             String linha = bufferedReader.readLine();
             String[] valores = linha.split(" ");
-            
 
             for (String valor : valores) {
                 lista.addLast(Integer.parseInt(valor));
@@ -51,16 +50,34 @@ public class MaquinaDeLerArquivos {
             // Executar as ações apenas da qtd de ações
             for (int i = 0; i < qtdAcoes; i++) {
                 linha = bufferedReader.readLine();
+                if (linha == null)
+                    break;
                 executarAcao(linha);
             }
-            //uma vez acabado tudo fechar o scanner
-            
-            
+            // uma vez acabado tudo fechar o scanner
+
             // lista.matarLista();
             lista.scanner.close();
             bufferedReader.close();
 
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void saveToFile(String caminho) {
+        try {
+            java.io.FileWriter fileWriter = new java.io.FileWriter(caminho);
+            java.io.BufferedWriter bufferedWriter = new java.io.BufferedWriter(fileWriter);
+
+            Node current = lista.head;
+            while (current != null) {
+                bufferedWriter.write(current.value + (current.next != null ? " " : ""));
+                current = current.next;
+            }
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+            System.out.println("Lista salva em " + caminho);
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
@@ -108,6 +125,10 @@ public class MaquinaDeLerArquivos {
 
                 }
                 break;
+            case "S": // SALVAR
+                saveToFile("atividade_02\\output.txt");
+                break;
+
         }
     }
 }
