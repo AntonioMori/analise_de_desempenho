@@ -56,11 +56,11 @@ public class MaquinaDeLerArquivos {
             //uma vez acabado tudo fechar o scanner
             
             
-            lista.matarLista();
-            // lista.scanner.close();
+            // lista.matarLista();
+            lista.scanner.close();
             bufferedReader.close();
 
-            
+
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
