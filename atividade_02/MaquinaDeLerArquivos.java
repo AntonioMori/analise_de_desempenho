@@ -18,8 +18,9 @@ public class MaquinaDeLerArquivos {
             String linha = bufferedReader.readLine();
             String[] valores = linha.split(" ");
 
+            // adiciona os valores na lista 
             for (String valor : valores) {
-                lista.addLast(Integer.parseInt(valor));
+                this.lista.addLast(Integer.parseInt(valor));
             }
 
             // Ler quantidade de ações
@@ -78,6 +79,7 @@ public class MaquinaDeLerArquivos {
             bufferedWriter.newLine();
             bufferedWriter.close();
             System.out.println("Lista salva em " + caminho);
+            System.out.println();
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
@@ -95,7 +97,7 @@ public class MaquinaDeLerArquivos {
 
                 if (debugMode) {
                     int valorAntes = lista.getValorPosicao(posicao);
-                    System.out.println();
+                    // System.out.println();
                     System.out.println("Adicionou " + numero + " na posição " + posicao
                             + ", valor anterior dessa posição: " + valorAntes);
                     System.out.println();
@@ -108,7 +110,7 @@ public class MaquinaDeLerArquivos {
                 int posicaoRemovido = lista.removePrimeiroEncontrado(valorRemover);
 
                 if (debugMode) {
-                    System.out.println();
+                    // System.out.println();
                     System.out.println("Removeu " + valorRemover + " da posição " + posicaoRemovido);
                     System.out.println();
                 }

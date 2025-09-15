@@ -32,8 +32,8 @@ public class LinkedList {
     public void printList() {
         if (this.size > 200) {
             System.out.println("Lista muito grande para imprimir!");
-            System.out.println("toma os 3 primeiros numeros:    ");
-            printFirstThree();
+            // System.out.println("toma os 3 primeiros numeros: ");
+            // printFirstThree();
         } else {
 
             // começa do começo k
@@ -54,8 +54,8 @@ public class LinkedList {
 
         if (this.size > 200) {
             System.out.println("Lista muito grande para imprimir!");
-            System.out.println("toma os 3 primeiros numeros:    ");
-            printFirstThree();
+            // System.out.println("toma os 3 primeiros numeros:    ");
+            // printFirstThree();
         } else {
 
             Node current = head;
@@ -237,7 +237,7 @@ public class LinkedList {
         }
 
         // se encontrarmos o valor então precisamos remover no meio ent trabalhar com
-        // lógica, pega o
+        // lógica de lista ligadas
         current.previous.next = current.next; // o proximo do anterior do atual é o próximo do atual k
         if (current.next != null) {
             current.next.previous = current.previous; // se o próximo do atual não for nulo então o anterior do próximo
