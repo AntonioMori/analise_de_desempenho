@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py --version)",
+      "Bash(py:*)",
+      "Bash(dir)",
+      "Bash(del linkedList.py)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
