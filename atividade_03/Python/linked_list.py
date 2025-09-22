@@ -68,7 +68,10 @@ class LinkedList:
 
     def add_at(self, index, value):
         if index < 0 or index > self.size:
-            raise IndexError("Index inválido")
+            print("----------------------------------------------")
+            print(f"Índice {index} inválido para adição! Tamanho atual da lista: {self.size}")
+            print()
+            return
 
         if index == 0:
             self.add_first(value)

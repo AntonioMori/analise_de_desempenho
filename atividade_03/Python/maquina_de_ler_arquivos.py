@@ -5,7 +5,6 @@ class MaquinaDeLerArquivos:
         self.lista = LinkedList()
         self.qtd_acoes = 0
         self.debug_mode = False
-        self.resultados = []
 
     def ler_arquivo(self, caminho):
         try:
@@ -64,13 +63,6 @@ class MaquinaDeLerArquivos:
         except Exception as e:
             print(f"Erro ao salvar arquivo: {e}")
 
-    def salvar_resultados(self, caminho="resultado.txt"):
-        try:
-            with open(caminho, 'w') as file:
-                for resultado in self.resultados:
-                    file.write(resultado + '\n')
-        except Exception as e:
-            print(f"Erro ao salvar resultados: {e}")
 
     def executar_acao(self, linha):
         partes = linha.strip().split()
@@ -104,19 +96,8 @@ class MaquinaDeLerArquivos:
             if self.debug_mode:
                 self.lista.print_list_index()
             else:
-                # Captura a saída da lista para salvar nos resultados
-                current = self.lista.head
-                valores = []
-                while current is not None:
-                    valores.append(str(current.value))
-                    current = current.next
-                resultado = ' '.join(valores)
-                print(resultado)
-                self.resultados.append(resultado)
+                self.lista.print_list()
 
         elif acao == "S":  # SALVAR
             self.save_to_file("output.txt")
 
-        # Salvar resultados ao final de cada operação P
-        if acao == "P" and not self.debug_mode:
-            self.salvar_resultados()

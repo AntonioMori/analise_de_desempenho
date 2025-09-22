@@ -115,7 +115,10 @@ public class LinkedList {
     // addAt
     public void addAt(int index, int value) {
         if (index < 0 || index > size) {
-            throw new Error("Index inválido");
+            System.out.println("----------------------------------------------");
+            System.out.println("Índice " + index + " inválido para adição! Tamanho atual da lista: " + size);
+            System.out.println();
+            return;
         }
         if (index == 0) {
             addFirst(value);

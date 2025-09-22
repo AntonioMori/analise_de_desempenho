@@ -6,7 +6,9 @@ def main():
     maquina_topada.debug_mode = False
 
     # Usar o separador de arquivo apropriado para o sistema operacional
-    arquivo = os.path.join("arq-novo.txt")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    arquivo = os.path.join(script_dir, "arq-novo.txt")
+    print(f"Lendo arquivo: {arquivo}")
     maquina_topada.ler_arquivo(arquivo)
 
 if __name__ == "__main__":
