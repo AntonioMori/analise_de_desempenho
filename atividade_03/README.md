@@ -46,5 +46,6 @@ python main.py
 ```bash
 cd JavaScript
 node main.js
-```
+...
 
+```
