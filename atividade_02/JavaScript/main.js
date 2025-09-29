@@ -2,6 +2,7 @@ const path = require('path');
 const MaquinaDeLerArquivos = require('./MaquinaDeLerArquivos.js');
 
 function main() {
+    
     const maquinaTopada = new MaquinaDeLerArquivos();
     maquinaTopada.debugMode = false;
 

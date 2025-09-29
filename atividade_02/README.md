@@ -49,3 +49,11 @@ node main.js
 ...
 
 ```
+
+**Testes automátizados:**
+```bash
+cd 
+node main.js
+...
+
+```

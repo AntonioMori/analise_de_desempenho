@@ -7,7 +7,7 @@ Write-Host ""
 # Initialize CSV
 "Language,Iteration,Time(seconds)" | Out-File -FilePath "benchmark_results.csv" -Encoding UTF8
 
-$iterations = 25
+$iterations = 30
 
 # Test Java
 Write-Host "=== Java Test ==="
@@ -84,8 +84,8 @@ Write-Host ""
 Write-Host "Results saved to benchmark_results.csv"
 
 Write-Host ""
-# Write-Host "Generating Excel report..."
-# py generate_excel.py
+Write-Host "Generating Excel report..."
+py generate_excel.py
 
 Write-Host ""
 Write-Host "Benchmark completed!"

@@ -128,6 +128,7 @@ def create_excel_report(csv_file="benchmark_results.csv", excel_file="benchmark_
 
     # Save workbook
     wb.save(excel_file)
+    
     print(f"Excel report saved to: {excel_file}")
 
     # Create matplotlib charts
@@ -216,6 +217,7 @@ def create_matplotlib_charts(df):
         table[(i+1, 0)].set_text_props(weight='bold', color='white')
 
     plt.tight_layout()
+    plt.savefig("benchmark_charts.png")
     plt.show()
 
 if __name__ == "__main__":

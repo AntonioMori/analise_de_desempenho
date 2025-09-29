@@ -2,14 +2,20 @@ public class LinkedList {
     public Node head;
     public Node tail;
     public int size;
-    public java.util.Scanner scanner;
 
     // Construtor
     public LinkedList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
-        this.scanner = new java.util.Scanner(System.in);
+    }
+
+    // Construtor com capacidade inicial (para otimização)
+    public LinkedList(int initialCapacity) {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+        // Nota: LinkedList não pode pre-alocar nós, mas o construtor ajuda na documentação
     }
 
     public void printFirstThree() {
@@ -227,15 +233,6 @@ public class LinkedList {
             System.out.println("Valor " + value + " não encontrado para remoção!");
             System.out.println();
 
-            // java.util.Scanner scanner = new java.util.Scanner(System.in);
-
-            // System.out.println("Deseja continuar a execução? (s/n): ");
-            // String resposta = scanner.nextLine();
-            // if (!resposta.equalsIgnoreCase("s")) {
-            // System.out.println("Execução interrompida pelo usuário.");
-            // scanner.close();
-            // System.exit(0);
-            // }
             return -1;
         }
 
@@ -265,11 +262,9 @@ public class LinkedList {
     }
 
     public void matarLista() {
-
         System.out.println("Matando a lista...");
         head = null;
         tail = null;
         size = 0;
-        scanner.close();
     }
 }

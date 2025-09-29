@@ -11,21 +11,24 @@ public class MaquinaDeLerArquivos {
 
     public void lerArquivo(String caminho) {
         try {
-            java.io.FileReader fileReader = new java.io.FileReader(caminho);
-            java.io.BufferedReader bufferedReader = new java.io.BufferedReader(fileReader);
+            // Lê todo o arquivo de uma vez - mais eficiente
+            byte[] bytes = java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(caminho));
+            String content = new String(bytes, java.nio.charset.StandardCharsets.UTF_8);
+            String[] linhas = content.split("\n");
 
             // Ler primeira linha com os valores iniciais da lista
-            String linha = bufferedReader.readLine();
-            String[] valores = linha.split(" ");
+            String[] valores = linhas[0].trim().split(" ");
 
-            // adiciona os valores na lista 
+            // Pre-size a lista para evitar realocações
+            this.lista = new LinkedList(valores.length);
+
+            // adiciona os valores na lista
             for (String valor : valores) {
                 this.lista.addLast(Integer.parseInt(valor));
             }
 
             // Ler quantidade de ações
-            linha = bufferedReader.readLine();
-            qtdAcoes = Integer.parseInt(linha);
+            qtdAcoes = Integer.parseInt(linhas[1].trim());
 
             if (debugMode) {
 
@@ -49,17 +52,12 @@ public class MaquinaDeLerArquivos {
             }
 
             // Executar as ações apenas da qtd de ações
-            for (int i = 0; i < qtdAcoes; i++) {
-                linha = bufferedReader.readLine();
-                if (linha == null)
-                    break;
-                executarAcao(linha);
+            for (int i = 0; i < qtdAcoes && i + 2 < linhas.length; i++) {
+                String linha = linhas[i + 2].trim();
+                if (!linha.isEmpty()) {
+                    executarAcao(linha);
+                }
             }
-            // uma vez acabado tudo fechar o scanner
-
-            // lista.matarLista();
-            lista.scanner.close();
-            bufferedReader.close();
 
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -86,7 +84,6 @@ public class MaquinaDeLerArquivos {
     }
 
     private void executarAcao(String linha) {
-
         String[] partes = linha.split(" ");
         String acao = partes[0];
 
@@ -96,11 +93,15 @@ public class MaquinaDeLerArquivos {
                 int posicao = Integer.parseInt(partes[2]);
 
                 if (debugMode) {
-                    int valorAntes = lista.getValorPosicao(posicao);
-                    // System.out.println();
-                    System.out.println("Adicionou " + numero + " na posição " + posicao
-                            + ", valor anterior dessa posição: " + valorAntes);
-                    System.out.println();
+                    try {
+                        int valorAntes = lista.getValorPosicao(posicao);
+                        System.out.println("Adicionou " + numero + " na posição " + posicao
+                                + ", valor anterior dessa posição: " + valorAntes);
+                        System.out.println();
+                    } catch (Exception e) {
+                        System.out.println("Adicionou " + numero + " na posição " + posicao + " (posição estava vazia)");
+                        System.out.println();
+                    }
                 }
                 lista.addAt(posicao, numero);
 
@@ -109,8 +110,7 @@ public class MaquinaDeLerArquivos {
                 int valorRemover = Integer.parseInt(partes[1]);
                 int posicaoRemovido = lista.removePrimeiroEncontrado(valorRemover);
 
-                if (debugMode) {
-                    // System.out.println();
+                if (debugMode && posicaoRemovido != -1) {
                     System.out.println("Removeu " + valorRemover + " da posição " + posicaoRemovido);
                     System.out.println();
                 }
