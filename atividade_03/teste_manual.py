@@ -52,16 +52,16 @@ def criar_graficos_comparativos():
     
 
     # Calcular estatísticas
-    algoritmos = ['Python Bubble', 'Python Quick', 'JS Bubble', 'JS Quick']
-    dados_tempo = [python_bubble_tempos, python_quick_tempos, js_bubble_tempos, js_quick_tempos]
-    dados_memoria = [python_bubble_memorias, python_quick_memorias, js_bubble_memorias, js_quick_memorias]
+    algoritmos = ['Python Bubble', 'Python Quick', 'Go Bubble', 'Go Quick']
+    dados_tempo = [python_bubble_tempos, python_quick_tempos, go_bubble_tempos, go_quick_tempos]
+    dados_memoria = [python_bubble_memorias, python_quick_memorias, go_bubble_memorias, go_quick_memorias]
 
     medias_tempo = [np.mean(dados) for dados in dados_tempo]
     medias_memoria = [np.mean(dados) for dados in dados_memoria]
 
     # Criar subplot com 4 gráficos
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
-    cores = ['#FF6B6B', '#B64949', '#45B7D1', '#2B6D7C']
+    cores = ['#FF6B6B', '#B64949', '#4CAF50', '#2E7D32']
 
 
 
@@ -129,10 +129,10 @@ python_bubble_tempos = []
 python_bubble_memorias = []
 python_quick_tempos = []
 python_quick_memorias = []
-js_bubble_tempos = []
-js_bubble_memorias = []
-js_quick_tempos = []
-js_quick_memorias = []
+go_bubble_tempos = []
+go_bubble_memorias = []
+go_quick_tempos = []
+go_quick_memorias = []
 
 print("=== EXECUTANDO TESTES MANUAIS ===\n")
 
@@ -146,10 +146,10 @@ if escolha == 's' or escolha == 'sim':
         python_bubble_memorias = dados_salvos.get("python_bubble_memorias", [])
         python_quick_tempos = dados_salvos.get("python_quick_tempos", [])
         python_quick_memorias = dados_salvos.get("python_quick_memorias", [])
-        js_bubble_tempos = dados_salvos.get("js_bubble_tempos", [])
-        js_bubble_memorias = dados_salvos.get("js_bubble_memorias", [])
-        js_quick_tempos = dados_salvos.get("js_quick_tempos", [])
-        js_quick_memorias = dados_salvos.get("js_quick_memorias", [])
+        go_bubble_tempos = dados_salvos.get("go_bubble_tempos", [])
+        go_bubble_memorias = dados_salvos.get("go_bubble_memorias", [])
+        go_quick_tempos = dados_salvos.get("go_quick_tempos", [])
+        go_quick_memorias = dados_salvos.get("go_quick_memorias", [])
         print("Dados carregados com sucesso!\n")
     else:
         print("Não foi possível carregar os dados. Executando testes...\n")
@@ -178,22 +178,22 @@ if escolha != 's' and escolha != 'sim':
             python_quick_memorias.append(memoria)
             print(f"  {i+1}: {tempo:.4f}ms, {memoria:.4f}KB")
 
-    # Executar JavaScript Bubble Sort 10 vezes
-    print("\nJavaScript Bubble Sort:")
+    # Executar Go Bubble Sort 10 vezes
+    print("\nGo Bubble Sort:")
     for i in range(10):
-        tempo, memoria = executar_comando("node javascript_bubble_sort.js")
+        tempo, memoria = executar_comando("go run go_bubble_sort.go")
         if tempo is not None:
-            js_bubble_tempos.append(tempo)
-            js_bubble_memorias.append(memoria)
+            go_bubble_tempos.append(tempo)
+            go_bubble_memorias.append(memoria)
             print(f"  {i+1}: {tempo:.4f}ms, {memoria:.4f}KB")
 
-    # Executar JavaScript Quick Sort 10 vezes
-    print("\nJavaScript Quick Sort:")
+    # Executar Go Quick Sort 10 vezes
+    print("\nGo Quick Sort:")
     for i in range(10):
-        tempo, memoria = executar_comando("node javascript_quick_sort.js")
+        tempo, memoria = executar_comando("go run go_quick_sort.go")
         if tempo is not None:
-            js_quick_tempos.append(tempo)
-            js_quick_memorias.append(memoria)
+            go_quick_tempos.append(tempo)
+            go_quick_memorias.append(memoria)
             print(f"  {i+1}: {tempo:.4f}ms, {memoria:.4f}KB")
 
     # Salvar os dados após executar os testes
@@ -202,10 +202,10 @@ if escolha != 's' and escolha != 'sim':
         "python_bubble_memorias": python_bubble_memorias,
         "python_quick_tempos": python_quick_tempos,
         "python_quick_memorias": python_quick_memorias,
-        "js_bubble_tempos": js_bubble_tempos,
-        "js_bubble_memorias": js_bubble_memorias,
-        "js_quick_tempos": js_quick_tempos,
-        "js_quick_memorias": js_quick_memorias
+        "go_bubble_tempos": go_bubble_tempos,
+        "go_bubble_memorias": go_bubble_memorias,
+        "go_quick_tempos": go_quick_tempos,
+        "go_quick_memorias": go_quick_memorias
     }
     salvar_dados(dados_para_salvar)
     print()
@@ -220,12 +220,12 @@ print(f"python_quick_tempos = {python_quick_tempos}")
 print(f"python_quick_memorias = {python_quick_memorias}")
 print()
 
-print(f"js_bubble_tempos = {js_bubble_tempos}")
-print(f"js_bubble_memorias = {js_bubble_memorias}")
+print(f"go_bubble_tempos = {go_bubble_tempos}")
+print(f"go_bubble_memorias = {go_bubble_memorias}")
 print()
 
-print(f"js_quick_tempos = {js_quick_tempos}")
-print(f"js_quick_memorias = {js_quick_memorias}")
+print(f"go_quick_tempos = {go_quick_tempos}")
+print(f"go_quick_memorias = {go_quick_memorias}")
 
 # Calcular médias simples
 print(f"\n=== MEDIAS ===")
@@ -233,10 +233,10 @@ if python_bubble_tempos:
     print(f"Python Bubble - Média: {sum(python_bubble_tempos)/len(python_bubble_tempos):.4f}ms")
 if python_quick_tempos:
     print(f"Python Quick - Média: {sum(python_quick_tempos)/len(python_quick_tempos):.4f}ms")
-if js_bubble_tempos:
-    print(f"JS Bubble - Média: {sum(js_bubble_tempos)/len(js_bubble_tempos):.4f}ms")
-if js_quick_tempos:
-    print(f"JS Quick - Média: {sum(js_quick_tempos)/len(js_quick_tempos):.4f}ms")
+if go_bubble_tempos:
+    print(f"Go Bubble - Média: {sum(go_bubble_tempos)/len(go_bubble_tempos):.4f}ms")
+if go_quick_tempos:
+    print(f"Go Quick - Média: {sum(go_quick_tempos)/len(go_quick_tempos):.4f}ms")
 
 
 

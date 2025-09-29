@@ -3,6 +3,7 @@ import platform
 import psutil
 import sys
 import os
+import tracemalloc
 
 def quicksort(arr):
     if len(arr) <= 1:
@@ -27,10 +28,6 @@ def write_numbers_to_file(filename, numbers):
         for number in numbers:
             file.write(f"{number}\n")
 
-def get_memory_usage():
-    process = psutil.Process(os.getpid())
-    return process.memory_info().rss / 1024  # Convert to KB
-
 def main():
     # System information
     print(f"Linguagem: Python {sys.version}")
@@ -51,17 +48,18 @@ def main():
 
     numbers = read_numbers_from_file(input_file)
 
-    # Measure memory before sorting
-    memory_before = get_memory_usage()
+    # Start tracing memory allocations
+    tracemalloc.start()
 
     # Measure execution time
     start_time = time.time()
     sorted_numbers = quicksort(numbers.copy())
     end_time = time.time()
 
-    # Measure memory after sorting
-    memory_after = get_memory_usage()
-    memory_used = memory_after - memory_before
+    # Get memory usage
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    memory_used = peak / 1024  # Convert to KB
 
     # Write output file
     write_numbers_to_file(output_file, sorted_numbers)
