@@ -36,7 +36,7 @@ def salvar_dados(dados, arquivo="save.txt"):
         json.dump(dados, f, indent=2)
     print(f"Dados salvos em {arquivo}")
 
-def carregar_dados(arquivo="save.txt"):
+def carregar_dados(arquivo="save.json"):
     """Carrega os arrays de resultados de um arquivo"""
     try:
         with open(arquivo, 'r') as f:
@@ -61,6 +61,7 @@ def criar_graficos_comparativos():
 
     # Criar subplot com 4 gráficos
     fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
+    plt.subplots_adjust(hspace=0.16)
     cores = ['#FF6B6B', '#B64949', '#4CAF50', '#2E7D32']
 
 
