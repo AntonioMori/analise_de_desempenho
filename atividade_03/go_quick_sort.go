@@ -79,20 +79,20 @@ func getMemoryUsage() uint64 {
 }
 
 func main() {
-	// System information
+	
 	fmt.Printf("Linguagem: Go %s\n", runtime.Version())
 	fmt.Printf("Sistema: %s\n", runtime.GOOS)
 	fmt.Printf("Arquitetura: %s\n", runtime.GOARCH)
 	fmt.Printf("Algoritmo: Quick Sort\n")
 	fmt.Println(strings.Repeat("-", 50))
 
-	// Create resultados folder if it doesn't exist
+	
 	resultadosFolder := "resultados"
 	if _, err := os.Stat(resultadosFolder); os.IsNotExist(err) {
 		os.Mkdir(resultadosFolder, 0755)
 	}
 
-	// Read input file
+	
 	inputFile := "input.txt"
 	outputFile := "resultados/arq-saida-go-quick.txt"
 
@@ -102,35 +102,34 @@ func main() {
 		return
 	}
 
-	// Force garbage collection before measurement
+	
 	runtime.GC()
-	runtime.GC() // Call twice to ensure cleanup
-
-	// Measure memory before sorting
+	runtime.GC()
+	
 	memoryBefore := getMemoryUsage()
 
-	// Measure execution time
+	
 	startTime := time.Now()
 
-	// Create a copy for sorting
+	
 	numbersCopy := make([]int, len(numbers))
 	copy(numbersCopy, numbers)
 	sortedNumbers := quickSort(numbersCopy)
 
 	endTime := time.Now()
 
-	// Measure memory after sorting
+	
 	memoryAfter := getMemoryUsage()
-	memoryUsed := float64(memoryAfter-memoryBefore) / 1024 // Convert to KB
+	memoryUsed := float64(memoryAfter-memoryBefore) / 1024 
 
-	// Write output file
+	
 	err = writeNumbersToFile(outputFile, sortedNumbers)
 	if err != nil {
 		fmt.Printf("Erro ao escrever arquivo: %v\n", err)
 		return
 	}
 
-	// Print results
+	
 	executionTimeMs := float64(endTime.Sub(startTime).Nanoseconds()) / 1000000
 	fmt.Printf("Tempo de execução: %.2f ms\n", executionTimeMs)
 	fmt.Printf("Memoria utilizada: %.2f KB\n", memoryUsed)

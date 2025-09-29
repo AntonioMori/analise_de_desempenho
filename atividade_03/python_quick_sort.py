@@ -29,7 +29,7 @@ def write_numbers_to_file(filename, numbers):
             file.write(f"{number}\n")
 
 def main():
-    # System information
+    
     print(f"Linguagem: Python {sys.version}")
     print(f"Sistema: {platform.system()} {platform.release()}")
     print(f"Processador: {platform.processor()}")
@@ -37,34 +37,34 @@ def main():
     print(f"Algoritmo: Quick Sort")
     print("-" * 50)
 
-    # Create resultados folder if it doesn't exist
+    
     resultados_folder = "resultados"
     if not os.path.exists(resultados_folder):
         os.makedirs(resultados_folder)
 
-    # Read input file
+    
     input_file = "input.txt"
     output_file = os.path.join(resultados_folder, "arq-saida-python-quick.txt")
 
     numbers = read_numbers_from_file(input_file)
 
-    # Start tracing memory allocations
+    
     tracemalloc.start()
 
-    # Measure execution time
+    
     start_time = time.time()
     sorted_numbers = quicksort(numbers.copy())
     end_time = time.time()
 
-    # Get memory usage
+    
     current, peak = tracemalloc.get_traced_memory()
     tracemalloc.stop()
-    memory_used = peak / 1024  # Convert to KB
+    memory_used = peak / 1024  
 
-    # Write output file
+    
     write_numbers_to_file(output_file, sorted_numbers)
 
-    # Print results
+    
     execution_time_ms = (end_time - start_time) * 1000
     print(f"Tempo de execução: {execution_time_ms:.2f} ms")
     print(f"Memoria utilizada: {memory_used:.2f} KB")
