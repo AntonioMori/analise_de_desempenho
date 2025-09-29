@@ -37,9 +37,15 @@ function main() {
     console.log(`Algoritmo: Quick Sort`);
     console.log("-".repeat(50));
 
+    // Create resultados folder if it doesn't exist
+    const resultadosFolder = "resultados";
+    if (!fs.existsSync(resultadosFolder)) {
+        fs.mkdirSync(resultadosFolder);
+    }
+
     // Read input file
     const inputFile = "input.txt";
-    const outputFile = "arq-saida-javascript-quick.txt";
+    const outputFile = `${resultadosFolder}/arq-saida-javascript-quick.txt`;
 
     const numbers = readNumbersFromFile(inputFile);
 

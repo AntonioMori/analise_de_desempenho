@@ -116,7 +116,7 @@ def criar_graficos_comparativos():
     ax4.legend()
 
     plt.tight_layout()
-    plt.savefig('oi.png', dpi=300, bbox_inches='tight')
+    plt.savefig('save.png', dpi=300, bbox_inches='tight')
     plt.show()
 
 

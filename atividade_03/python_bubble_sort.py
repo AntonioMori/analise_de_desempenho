@@ -37,9 +37,14 @@ def main():
     print(f"Algoritmo: Bubble Sort")
     print("-" * 50)
 
+    # Create resultados folder if it doesn't exist
+    resultados_folder = "resultados"
+    if not os.path.exists(resultados_folder):
+        os.makedirs(resultados_folder)
+
     # Read input file
     input_file = "input.txt"
-    output_file = "arq-saida-python-bubble.txt"
+    output_file = os.path.join(resultados_folder, "arq-saida-python-bubble.txt")
 
     numbers = read_numbers_from_file(input_file)
 
