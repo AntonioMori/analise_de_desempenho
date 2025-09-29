@@ -180,7 +180,7 @@ if escolha != 's' and escolha != 'sim':
 
     # Executar Go Bubble Sort 10 vezes
     print("\nGo Bubble Sort:")
-    for i in range(10):
+    for i in range(3):
         tempo, memoria = executar_comando("go run go_bubble_sort.go")
         if tempo is not None:
             go_bubble_tempos.append(tempo)
