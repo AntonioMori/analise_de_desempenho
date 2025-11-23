@@ -1,0 +1,11 @@
+# 1. Define a imagem base como Ubuntu (versão 22.04 é estável e popular)
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y python3 python3-pip
+
+RUN pip3 install pandas
+
+WORKDIR /app
+COPY process.py .
+
+CMD ["python3", "process.py"]
